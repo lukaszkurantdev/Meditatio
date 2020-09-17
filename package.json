@@ -10,8 +10,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@types/react-native-video": "^5.0.3",
     "react": "16.13.1",
     "react-native": "0.63.2",
+    "react-native-svg": "^12.1.0",
+    "react-native-video": "^5.1.0-alpha8",
     "ts-debounce": "^2.0.1"
   },
   "devDependencies": {
