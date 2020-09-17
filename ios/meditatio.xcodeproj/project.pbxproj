@@ -16,6 +16,14 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* meditatioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* meditatioTests.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		D0B1DCD8AD744926981E87B0 /* AgeoPersonalUse-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5A49180B237A41EABA1ABDD3 /* AgeoPersonalUse-Bold.otf */; };
+		813369118A154A22BDA8CE0D /* AgeoPersonalUse-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE53CE8CCB95467ABE4BD683 /* AgeoPersonalUse-ExtraBold.otf */; };
+		005266186DB143E3B3A7E4F7 /* AgeoPersonalUse-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 84B65281B9CC41AD962AEAAB /* AgeoPersonalUse-Heavy.otf */; };
+		86A1F17C37294C358A5CFDA2 /* AgeoPersonalUse-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CF69B9F9FCEE43AB97BF2257 /* AgeoPersonalUse-Light.otf */; };
+		BD978ACB648440AEB3E9C520 /* AgeoPersonalUse-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 080C1D4B2E9045CD95671022 /* AgeoPersonalUse-Medium.otf */; };
+		41D4E672756A407D8FFE4817 /* AgeoPersonalUse-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1538B3634F74A6BB5FBDA80 /* AgeoPersonalUse-SemiBold.otf */; };
+		B0B4162D7770486C8C52B1BD /* AgeoPersonalUse-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDF77F337BC4A44855058B3 /* AgeoPersonalUse-Thin.otf */; };
+		C5FC82346BD24776A09B3DB0 /* AgeoPersonalUse.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1AFDB8EB0FB4BD5BD2A1DC6 /* AgeoPersonalUse.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +59,14 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = meditatio/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		5A49180B237A41EABA1ABDD3 /* AgeoPersonalUse-Bold.otf */ = {isa = PBXFileReference; name = "AgeoPersonalUse-Bold.otf"; path = "../src/assets/fonts/AgeoPersonalUse-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EE53CE8CCB95467ABE4BD683 /* AgeoPersonalUse-ExtraBold.otf */ = {isa = PBXFileReference; name = "AgeoPersonalUse-ExtraBold.otf"; path = "../src/assets/fonts/AgeoPersonalUse-ExtraBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		84B65281B9CC41AD962AEAAB /* AgeoPersonalUse-Heavy.otf */ = {isa = PBXFileReference; name = "AgeoPersonalUse-Heavy.otf"; path = "../src/assets/fonts/AgeoPersonalUse-Heavy.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CF69B9F9FCEE43AB97BF2257 /* AgeoPersonalUse-Light.otf */ = {isa = PBXFileReference; name = "AgeoPersonalUse-Light.otf"; path = "../src/assets/fonts/AgeoPersonalUse-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		080C1D4B2E9045CD95671022 /* AgeoPersonalUse-Medium.otf */ = {isa = PBXFileReference; name = "AgeoPersonalUse-Medium.otf"; path = "../src/assets/fonts/AgeoPersonalUse-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F1538B3634F74A6BB5FBDA80 /* AgeoPersonalUse-SemiBold.otf */ = {isa = PBXFileReference; name = "AgeoPersonalUse-SemiBold.otf"; path = "../src/assets/fonts/AgeoPersonalUse-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1CDF77F337BC4A44855058B3 /* AgeoPersonalUse-Thin.otf */ = {isa = PBXFileReference; name = "AgeoPersonalUse-Thin.otf"; path = "../src/assets/fonts/AgeoPersonalUse-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C1AFDB8EB0FB4BD5BD2A1DC6 /* AgeoPersonalUse.otf */ = {isa = PBXFileReference; name = "AgeoPersonalUse.otf"; path = "../src/assets/fonts/AgeoPersonalUse.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +156,7 @@
 				00E356EF1AD99517003FC87E /* meditatioTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				C6D4986560314AC184A09D73 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -156,6 +173,22 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		C6D4986560314AC184A09D73 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				5A49180B237A41EABA1ABDD3 /* AgeoPersonalUse-Bold.otf */,
+				EE53CE8CCB95467ABE4BD683 /* AgeoPersonalUse-ExtraBold.otf */,
+				84B65281B9CC41AD962AEAAB /* AgeoPersonalUse-Heavy.otf */,
+				CF69B9F9FCEE43AB97BF2257 /* AgeoPersonalUse-Light.otf */,
+				080C1D4B2E9045CD95671022 /* AgeoPersonalUse-Medium.otf */,
+				F1538B3634F74A6BB5FBDA80 /* AgeoPersonalUse-SemiBold.otf */,
+				1CDF77F337BC4A44855058B3 /* AgeoPersonalUse-Thin.otf */,
+				C1AFDB8EB0FB4BD5BD2A1DC6 /* AgeoPersonalUse.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -295,6 +328,14 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				D0B1DCD8AD744926981E87B0 /* AgeoPersonalUse-Bold.otf in Resources */,
+				813369118A154A22BDA8CE0D /* AgeoPersonalUse-ExtraBold.otf in Resources */,
+				005266186DB143E3B3A7E4F7 /* AgeoPersonalUse-Heavy.otf in Resources */,
+				86A1F17C37294C358A5CFDA2 /* AgeoPersonalUse-Light.otf in Resources */,
+				BD978ACB648440AEB3E9C520 /* AgeoPersonalUse-Medium.otf in Resources */,
+				41D4E672756A407D8FFE4817 /* AgeoPersonalUse-SemiBold.otf in Resources */,
+				B0B4162D7770486C8C52B1BD /* AgeoPersonalUse-Thin.otf in Resources */,
+				C5FC82346BD24776A09B3DB0 /* AgeoPersonalUse.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
