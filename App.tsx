@@ -1,22 +1,8 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-import WelcomeScreen from './src/containers/WelcomeScreen';
+import MainStackNavigator from './src/navigation/MainContainer';
 
 const App = () => {
-  return (
-    <>
-      <WelcomeScreen />
-    </>
-  );
+  return <MainStackNavigator />;
 };
-
-const styles = StyleSheet.create({});
 
 export default App;
