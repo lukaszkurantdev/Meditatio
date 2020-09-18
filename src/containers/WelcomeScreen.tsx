@@ -3,6 +3,10 @@ import {View, StyleSheet, StatusBar, Text} from 'react-native';
 import Video from 'react-native-video';
 import * as Animatable from 'react-native-animatable';
 
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
+import {RootStackParamList} from '../navigation/MainContainer';
+
 import Button, {ButtonType} from '../components/Button';
 import MandalaAnimatedLogo from '../components/MandalaAnimatedLogo';
 
@@ -10,10 +14,18 @@ import FacebookLogo from '../assets/svg/FacebookLogo';
 import GoogleLogo from '../assets/svg/GoogleLogo';
 
 import GlobalStyles from '../styles/GlobalStyles';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-interface IProps {}
+interface IProps {
+  navigation: StackNavigationProp<RootStackParamList, 'WelcomeScreen'>;
+  route: RouteProp<RootStackParamList, 'WelcomeScreen'>;
+}
 
 export default class WelcomeScreen extends React.Component<IProps> {
+  navigateToLoginScreen = () => {
+    this.props.navigation.navigate('LoginScreen');
+  };
+
   render() {
     return (
       <>
@@ -57,9 +69,12 @@ export default class WelcomeScreen extends React.Component<IProps> {
               outline
             />
 
-            <Text style={[GlobalStyles.standardText, styles.existsAccountText]}>
-              Already have account?
-            </Text>
+            <TouchableOpacity onPress={this.navigateToLoginScreen}>
+              <Text
+                style={[GlobalStyles.standardText, styles.existsAccountText]}>
+                Already have account?
+              </Text>
+            </TouchableOpacity>
           </Animatable.View>
         </View>
       </>

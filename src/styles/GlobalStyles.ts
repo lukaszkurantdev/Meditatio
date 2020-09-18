@@ -8,6 +8,11 @@ const GlobalStyles = StyleSheet.create({
     fontSize: 25,
     color: Colors.WHITE,
   },
+  headerText: {
+    fontFamily: Fonts.REGULAR,
+    fontSize: 20,
+    color: Colors.WHITE,
+  },
   standardText: {
     fontFamily: Fonts.REGULAR,
     fontSize: 15,
