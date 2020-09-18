@@ -2,7 +2,7 @@ const Colors = {
   PRIMARY: 'green',
   SECONDARY: 'blue',
   WHITE: 'white',
-  black: 'black',
+  BLACK: 'black',
 };
 
 export default Colors;
