@@ -22,67 +22,66 @@ interface IProps {
   route: RouteProp<RootStackParamList, 'WelcomeScreen'>;
 }
 
-export default class WelcomeScreen extends React.Component<IProps> {
-  navigateToLoginScreen = () => {
-    this.props.navigation.navigate('LoginScreen');
+const WelcomeScreen: React.FC<IProps> = ({navigation, route}) => {
+  const navigateToLoginScreen = () => {
+    navigation.navigate('LoginScreen');
   };
 
-  render() {
-    return (
-      <>
-        <StatusBar translucent backgroundColor="transparent" />
-        <Video
-          source={require('../assets/videos/start_video.mp4')}
-          style={styles.backgroundVideo}
-          repeat
-          paused={false}
-          resizeMode="cover"
-        />
-        <View style={styles.container}>
-          <View style={[styles.partContainer]}>
-            <MandalaAnimatedLogo />
-            <Text style={[GlobalStyles.logoText, styles.logoText]}>
-              meditatio
-            </Text>
-          </View>
-
-          <Animatable.View
-            style={[styles.partContainer]}
-            animation="fadeInUp"
-            useNativeDriver
-            delay={1500}
-            duration={700}>
-            <Button
-              title="Continue with Google"
-              type={ButtonType.SECONDARY}
-              icon={<GoogleLogo />}
-            />
-
-            <Button
-              title="Continue with Facebook"
-              type={ButtonType.SECONDARY}
-              icon={<FacebookLogo />}
-            />
-
-            <Button
-              title="I'll use my email"
-              type={ButtonType.SECONDARY}
-              outline
-            />
-
-            <TouchableOpacity onPress={this.navigateToLoginScreen}>
-              <Text
-                style={[GlobalStyles.standardText, styles.existsAccountText]}>
-                Already have account?{' '}
-                <Text style={styles.highlight}>Sign in</Text>
-              </Text>
-            </TouchableOpacity>
-          </Animatable.View>
+  return (
+    <>
+      <StatusBar translucent backgroundColor="transparent" />
+      <Video
+        source={require('../assets/videos/start_video.mp4')}
+        style={styles.backgroundVideo}
+        repeat
+        paused={false}
+        resizeMode="cover"
+      />
+      <View style={styles.container}>
+        <View style={[styles.partContainer]}>
+          <MandalaAnimatedLogo />
+          <Text style={[GlobalStyles.logoText, styles.logoText]}>
+            meditatio
+          </Text>
         </View>
-      </>
-    );
-  }
-}
+
+        <Animatable.View
+          style={[styles.partContainer]}
+          animation="fadeInUp"
+          useNativeDriver
+          delay={1500}
+          duration={700}>
+          <Button
+            title="Continue with Google"
+            type={ButtonType.SECONDARY}
+            icon={<GoogleLogo />}
+          />
+
+          <Button
+            title="Continue with Facebook"
+            type={ButtonType.SECONDARY}
+            icon={<FacebookLogo />}
+          />
+
+          <Button
+            title="I'll use my email"
+            type={ButtonType.SECONDARY}
+            outline
+          />
+
+          <TouchableOpacity onPress={navigateToLoginScreen}>
+            <Text style={[GlobalStyles.standardText, styles.existsAccountText]}>
+              Already have account?{' '}
+              <Text style={styles.highlight}>Sign in</Text>
+            </Text>
+          </TouchableOpacity>
+        </Animatable.View>
+      </View>
+    </>
+  );
+};
+
+export default WelcomeScreen;
 
 const styles = StyleSheet.create({
   backgroundVideo: {

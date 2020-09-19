@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -24,53 +18,53 @@ interface IProps {
   route: RouteProp<RootStackParamList, 'LoginScreen'>;
 }
 
-export default class LoginScreen extends React.Component<IProps> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <FunctionalIconButton
-          iconName="align-left"
-          iconColor={Colors.PRIMARY}
-          onPress={this.props.navigation.goBack}
+const LoginScreen: React.FC<IProps> = ({navigation}) => {
+  return (
+    <View style={styles.container}>
+      <FunctionalIconButton
+        iconName="align-left"
+        iconColor={Colors.PRIMARY}
+        onPress={navigation.goBack}
+      />
+
+      <View style={styles.headerMargins}>
+        <Text style={GlobalStyles.hugeText}>Sign in</Text>
+        <Text style={[GlobalStyles.standardText, styles.inputMargins]}>
+          Enter the world of silence and contemplation
+        </Text>
+      </View>
+
+      <View style={styles.form}>
+        <Input
+          placeholder={'Email'}
+          type={InputType.EMAIL}
+          icon={<Icon name="mail" size={15} color={Colors.PRIMARY} />}
+          containerStyle={styles.inputMargins}
+        />
+        <Input
+          placeholder={'Password'}
+          type={InputType.PASSWORD}
+          icon={<Icon name="key" size={15} color={Colors.PRIMARY} />}
+          containerStyle={styles.inputMargins}
+        />
+        <Button
+          title="Sign in"
+          type={ButtonType.SECONDARY}
+          containerStyle={styles.buttonMargins}
         />
 
-        <View style={styles.headerMargins}>
-          <Text style={GlobalStyles.hugeText}>Sign in</Text>
-          <Text style={[GlobalStyles.standardText, styles.inputMargins]}>
-            Enter the world of silence and contemplation
+        <TouchableOpacity onPress={navigation.goBack}>
+          <Text style={[GlobalStyles.standardText, styles.existsAccountText]}>
+            You don't have account yet?{' '}
+            <Text style={styles.highlight}>Sign up</Text>
           </Text>
-        </View>
-
-        <View style={styles.form}>
-          <Input
-            placeholder={'Email'}
-            type={InputType.EMAIL}
-            icon={<Icon name="mail" size={15} color={Colors.PRIMARY} />}
-            containerStyle={styles.inputMargins}
-          />
-          <Input
-            placeholder={'Password'}
-            type={InputType.PASSWORD}
-            icon={<Icon name="key" size={15} color={Colors.PRIMARY} />}
-            containerStyle={styles.inputMargins}
-          />
-          <Button
-            title="Sign in"
-            type={ButtonType.SECONDARY}
-            containerStyle={styles.buttonMargins}
-          />
-
-          <TouchableOpacity onPress={this.props.navigation.goBack}>
-            <Text style={[GlobalStyles.standardText, styles.existsAccountText]}>
-              You don't have account yet?{' '}
-              <Text style={styles.highlight}>Sign up</Text>
-            </Text>
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
+
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
