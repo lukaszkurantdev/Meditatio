@@ -58,6 +58,7 @@ const Button: React.FC<IProps> = ({
   return (
     <TouchableOpacity
       activeOpacity={0.8}
+      testID="button-id"
       style={[
         styles.container,
         {borderColor: buttonColors.background},

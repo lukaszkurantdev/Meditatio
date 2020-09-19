@@ -67,6 +67,8 @@ export default class WelcomeScreen extends React.Component<IProps> {
               title="I'll use my email"
               type={ButtonType.SECONDARY}
               outline
+              pressWithDebounce
+              onPress={this.navigateToLoginScreen}
             />
 
             <TouchableOpacity onPress={this.navigateToLoginScreen}>
