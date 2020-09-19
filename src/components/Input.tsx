@@ -17,6 +17,7 @@ interface IProps {
   type?: InputType;
   multiline?: boolean;
   inputProps?: TextInputProps;
+  icon?: JSX.Element;
 }
 
 export const InputValidations: {
@@ -47,7 +48,8 @@ const Input: React.FC<IProps> = forwardRef(
       multiline,
       placeholder,
       inputProps,
-    }: IProps,
+      icon,
+    },
     reference,
   ) => {
     const [value, setValue] = useState('');
@@ -87,25 +89,25 @@ const Input: React.FC<IProps> = forwardRef(
     }));
 
     return (
-      <View style={containerStyle}>
-        <TextInput
-          style={[
-            styles.container,
-            multiline && styles.multiline,
-            error && styles.errorContainer,
-          ]}
-          value={value}
-          onChangeText={setValue}
-          selectionColor={Colors.PRIMARY}
-          onFocus={onFocus}
-          onBlur={validate}
-          secureTextEntry={type === InputType.PASSWORD}
-          multiline={!!multiline}
-          placeholder={placeholder}
-          testID="input-id"
-          {...inputProps}
-        />
-
+      <View style={[styles.mainContainer, containerStyle]}>
+        <View
+          style={[styles.borderedContainer, error && styles.errorContainer]}>
+          <TextInput
+            style={[styles.container, multiline && styles.multiline]}
+            value={value}
+            onChangeText={setValue}
+            selectionColor={Colors.PRIMARY}
+            onFocus={onFocus}
+            onBlur={validate}
+            secureTextEntry={type === InputType.PASSWORD}
+            multiline={!!multiline}
+            placeholder={placeholder}
+            placeholderTextColor={Colors.LIGHTGRAY}
+            testID="input-id"
+            {...inputProps}
+          />
+          {icon}
+        </View>
         {!!errorMessage && (
           <Text style={[GlobalStyles.errorText, styles.errorText]}>
             {errorMessage}
@@ -119,15 +121,23 @@ const Input: React.FC<IProps> = forwardRef(
 export default Input;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    width: '100%',
+  },
+  borderedContainer: {
+    flexDirection: 'row',
+    borderColor: Colors.WHITE,
+    borderBottomWidth: 1,
+    height: 40,
+    alignItems: 'center',
+    paddingRight: 10,
+  },
   container: {
-    height: 50,
-    borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: Colors.WHITE,
-    borderColor: Colors.GRAY,
-    paddingHorizontal: 15,
     fontFamily: Fonts.REGULAR,
-    marginVertical: 5,
+    color: Colors.WHITE,
+    flex: 1,
+    marginRight: 10,
+    padding: 0,
   },
   multiline: {
     height: 100,
@@ -136,7 +146,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.DANGER,
   },
   errorText: {
-    marginHorizontal: 15,
     marginVertical: 3,
   },
 });

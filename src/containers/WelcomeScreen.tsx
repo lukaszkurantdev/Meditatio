@@ -15,6 +15,7 @@ import GoogleLogo from '../assets/svg/GoogleLogo';
 
 import GlobalStyles from '../styles/GlobalStyles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import Colors from '../styles/Colors';
 
 interface IProps {
   navigation: StackNavigationProp<RootStackParamList, 'WelcomeScreen'>;
@@ -67,14 +68,13 @@ export default class WelcomeScreen extends React.Component<IProps> {
               title="I'll use my email"
               type={ButtonType.SECONDARY}
               outline
-              pressWithDebounce
-              onPress={this.navigateToLoginScreen}
             />
 
             <TouchableOpacity onPress={this.navigateToLoginScreen}>
               <Text
                 style={[GlobalStyles.standardText, styles.existsAccountText]}>
-                Already have account?
+                Already have account?{' '}
+                <Text style={styles.highlight}>Sign in</Text>
               </Text>
             </TouchableOpacity>
           </Animatable.View>
@@ -109,5 +109,8 @@ const styles = StyleSheet.create({
   },
   logoText: {
     marginTop: 10,
+  },
+  highlight: {
+    color: Colors.PRIMARY,
   },
 });

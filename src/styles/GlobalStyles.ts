@@ -8,6 +8,11 @@ const GlobalStyles = StyleSheet.create({
     fontSize: 25,
     color: Colors.WHITE,
   },
+  hugeText: {
+    fontFamily: Fonts.BOLD,
+    fontSize: 40,
+    color: Colors.WHITE,
+  },
   headerText: {
     fontFamily: Fonts.REGULAR,
     fontSize: 20,
@@ -18,8 +23,11 @@ const GlobalStyles = StyleSheet.create({
     fontSize: 15,
     color: Colors.WHITE,
   },
-
-  errorText: {},
+  errorText: {
+    fontFamily: Fonts.REGULAR,
+    fontSize: 13,
+    color: Colors.DANGER,
+  },
 });
 
 export default GlobalStyles;

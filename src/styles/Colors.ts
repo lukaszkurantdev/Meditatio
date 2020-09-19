@@ -1,10 +1,12 @@
 const Colors = {
-  PRIMARY: 'green',
+  PRIMARY: '#b89f5c',
   SECONDARY: 'blue',
   WHITE: 'white',
   BLACK: 'black',
   GRAY: 'gray',
-  DANGER: 'red',
+  DANGER: '#ab1d0e',
+  BACKGROUND: '#17202b',
+  LIGHTGRAY: '#d9d9d9',
 };
 
 export default Colors;
