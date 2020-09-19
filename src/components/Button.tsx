@@ -57,7 +57,7 @@ const Button: React.FC<IProps> = ({
 
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
+      activeOpacity={0.6}
       testID="button-id"
       style={[
         styles.container,

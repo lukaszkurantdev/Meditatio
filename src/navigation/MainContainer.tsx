@@ -6,10 +6,12 @@ import {
 } from '@react-navigation/stack';
 import WelcomeScreen from '../containers/WelcomeScreen';
 import LoginScreen from '../containers/LoginScreen';
+import RegistrationScreen from '../containers/RegistrationScreen';
 
 export type RootStackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
+  RegistrationScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -25,6 +27,10 @@ export default class MainStackNavigator extends React.Component {
           }}>
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen
+            name="RegistrationScreen"
+            component={RegistrationScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );

@@ -15,11 +15,11 @@ import Colors from '../styles/Colors';
 import FunctionalIconButton from '../components/FunctionalIconButton';
 
 interface IProps {
-  navigation: StackNavigationProp<RootStackParamList, 'LoginScreen'>;
-  route: RouteProp<RootStackParamList, 'LoginScreen'>;
+  navigation: StackNavigationProp<RootStackParamList, 'RegistrationScreen'>;
+  route: RouteProp<RootStackParamList, 'RegistrationScreen'>;
 }
 
-const LoginScreen: React.FC<IProps> = ({navigation}) => {
+const RegistrationScreen: React.FC<IProps> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <FunctionalIconButton
@@ -30,7 +30,7 @@ const LoginScreen: React.FC<IProps> = ({navigation}) => {
       />
 
       <View style={styles.headerMargins}>
-        <Text style={GlobalStyles.hugeText}>Sign in</Text>
+        <Text style={GlobalStyles.hugeText}>Sign up</Text>
         <Text style={[GlobalStyles.standardText, styles.inputMargins]}>
           Enter the world of silence and contemplation
         </Text>
@@ -41,6 +41,12 @@ const LoginScreen: React.FC<IProps> = ({navigation}) => {
         animation="fadeInUp"
         useNativeDriver
         duration={700}>
+        <Input
+          placeholder={'Name'}
+          type={InputType.DEFAULT}
+          icon={<Icon name="user" size={15} color={Colors.PRIMARY} />}
+          containerStyle={styles.inputMargins}
+        />
         <Input
           placeholder={'Email'}
           type={InputType.EMAIL}
@@ -53,16 +59,21 @@ const LoginScreen: React.FC<IProps> = ({navigation}) => {
           icon={<Icon name="key" size={15} color={Colors.PRIMARY} />}
           containerStyle={styles.inputMargins}
         />
+        <Input
+          placeholder={'Confirm password'}
+          type={InputType.PASSWORD}
+          icon={<Icon name="key" size={15} color={Colors.PRIMARY} />}
+          containerStyle={styles.inputMargins}
+        />
         <Button
-          title="Sign in"
+          title="Sign up"
           type={ButtonType.SECONDARY}
           containerStyle={styles.buttonMargins}
         />
 
-        <TouchableOpacity onPress={navigation.goBack}>
+        <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
           <Text style={[GlobalStyles.standardText, styles.existsAccountText]}>
-            You don't have account yet?{' '}
-            <Text style={styles.highlight}>Sign up</Text>
+            You have account? <Text style={styles.highlight}>Sign in</Text>
           </Text>
         </TouchableOpacity>
       </Animatable.View>
@@ -70,7 +81,7 @@ const LoginScreen: React.FC<IProps> = ({navigation}) => {
   );
 };
 
-export default LoginScreen;
+export default RegistrationScreen;
 
 const styles = StyleSheet.create({
   container: {

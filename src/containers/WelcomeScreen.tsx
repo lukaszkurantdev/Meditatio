@@ -22,11 +22,7 @@ interface IProps {
   route: RouteProp<RootStackParamList, 'WelcomeScreen'>;
 }
 
-const WelcomeScreen: React.FC<IProps> = ({navigation, route}) => {
-  const navigateToLoginScreen = () => {
-    navigation.navigate('LoginScreen');
-  };
-
+const WelcomeScreen: React.FC<IProps> = ({navigation}) => {
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" />
@@ -67,9 +63,10 @@ const WelcomeScreen: React.FC<IProps> = ({navigation, route}) => {
             title="I'll use my email"
             type={ButtonType.SECONDARY}
             outline
+            onPress={() => navigation.navigate('RegistrationScreen')}
           />
 
-          <TouchableOpacity onPress={navigateToLoginScreen}>
+          <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
             <Text style={[GlobalStyles.standardText, styles.existsAccountText]}>
               Already have account?{' '}
               <Text style={styles.highlight}>Sign in</Text>
