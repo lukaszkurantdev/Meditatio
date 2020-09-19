@@ -42,7 +42,7 @@ const TypeColors: {[key in ButtonType]: {background: string; text: string}} = {
   },
 };
 
-const Button = ({
+const Button: React.FC<IProps> = ({
   title,
   loading,
   containerStyle,

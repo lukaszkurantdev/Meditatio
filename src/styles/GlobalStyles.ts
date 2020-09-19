@@ -18,6 +18,8 @@ const GlobalStyles = StyleSheet.create({
     fontSize: 15,
     color: Colors.WHITE,
   },
+
+  errorText: {},
 });
 
 export default GlobalStyles;

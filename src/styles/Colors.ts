@@ -3,6 +3,8 @@ const Colors = {
   SECONDARY: 'blue',
   WHITE: 'white',
   BLACK: 'black',
+  GRAY: 'gray',
+  DANGER: 'red',
 };
 
 export default Colors;
