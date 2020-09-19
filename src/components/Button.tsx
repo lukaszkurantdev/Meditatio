@@ -67,7 +67,10 @@ const Button: React.FC<IProps> = ({
       ]}
       onPress={press}>
       {loading ? (
-        <ActivityIndicator color={buttonColors.text} />
+        <ActivityIndicator
+          color={buttonColors.text}
+          testID="button-loader-id"
+        />
       ) : (
         <>
           {icon}

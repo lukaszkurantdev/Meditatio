@@ -1,4 +1,4 @@
-import React, {useImperativeHandle, useState} from 'react';
+import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {TextInput, StyleSheet, View, Text, TextInputProps} from 'react-native';
 //styles
 import Colors from '../styles/Colors';
@@ -19,7 +19,7 @@ interface IProps {
   inputProps?: TextInputProps;
 }
 
-const Validations: {
+export const InputValidations: {
   [key in InputType]: {message: string; func: (value: string) => boolean};
 } = {
   default: {
@@ -39,79 +39,82 @@ const Validations: {
   },
 };
 
-const Input: React.FC<IProps> = (
-  {
-    containerStyle,
-    type = InputType.DEFAULT,
-    multiline,
-    placeholder,
-    inputProps,
-  }: IProps,
-  reference,
-) => {
-  const [value, setValue] = useState('');
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+const Input: React.FC<IProps> = forwardRef(
+  (
+    {
+      containerStyle,
+      type = InputType.DEFAULT,
+      multiline,
+      placeholder,
+      inputProps,
+    }: IProps,
+    reference,
+  ) => {
+    const [value, setValue] = useState('');
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-  const setValidity = (error: boolean, message: string = '') => {
-    setError(error);
-    setErrorMessage(message);
-  };
+    const setValidity = (error: boolean, message: string = '') => {
+      setError(error);
+      setErrorMessage(message);
+    };
 
-  const validate = (): boolean => {
-    const validationType = Validations[type || 'default'];
-    const validate = validationType.func(value);
+    const validate = (): boolean => {
+      const validationType = InputValidations[type || 'default'];
+      const validate = validationType.func(value);
 
-    if (!validate) {
-      setValidity(true, validationType.message);
-    } else if (error) {
-      setValidity(false);
-    }
+      if (!validate) {
+        setValidity(true, validationType.message);
+      } else if (error) {
+        setValidity(false);
+      }
 
-    return value.length !== 0 && validate;
-  };
+      return value.length !== 0 && validate;
+    };
 
-  const onFocus = () => {
-    if (error) {
-      setValidity(false);
-    }
-  };
+    const onFocus = () => {
+      if (error) {
+        setValidity(false);
+      }
+    };
 
-  useImperativeHandle(reference, () => ({
-    getValue: () => {
-      return value;
-    },
-    setValidity: (error: boolean, message: string = '') =>
-      setValidity(error, message),
-    validate,
-  }));
+    useImperativeHandle(reference, () => ({
+      getValue: () => {
+        return value;
+      },
+      setValidity,
+      validate,
+    }));
 
-  return (
-    <View style={containerStyle}>
-      <TextInput
-        style={[
-          styles.container,
-          multiline && styles.multiline,
-          error && styles.errorContainer,
-        ]}
-        value={value}
-        onChangeText={setValue}
-        selectionColor={Colors.PRIMARY}
-        onFocus={onFocus}
-        secureTextEntry={type === InputType.PASSWORD}
-        multiline={!!multiline}
-        placeholder={placeholder}
-        {...inputProps}
-      />
+    return (
+      <View style={containerStyle}>
+        <TextInput
+          style={[
+            styles.container,
+            multiline && styles.multiline,
+            error && styles.errorContainer,
+          ]}
+          value={value}
+          onChangeText={setValue}
+          selectionColor={Colors.PRIMARY}
+          onFocus={onFocus}
+          onBlur={validate}
+          secureTextEntry={type === InputType.PASSWORD}
+          multiline={!!multiline}
+          placeholder={placeholder}
+          testID="input-id"
+          {...inputProps}
+        />
 
-      {!!errorMessage && (
-        <Text style={[GlobalStyles.errorText, styles.errorText]}>
-          {errorMessage}
-        </Text>
-      )}
-    </View>
-  );
-};
+        {!!errorMessage && (
+          <Text style={[GlobalStyles.errorText, styles.errorText]}>
+            {errorMessage}
+          </Text>
+        )}
+      </View>
+    );
+  },
+);
 
 export default Input;
 
