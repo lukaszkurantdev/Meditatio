@@ -5,6 +5,7 @@ import {
   Text,
   ActivityIndicator,
   ViewStyle,
+  Keyboard,
 } from 'react-native';
 import {debounce} from 'ts-debounce';
 import Colors from '../styles/Colors';
@@ -66,7 +67,11 @@ const Button: React.FC<IProps> = ({
         outline && styles.outlineContainer,
         containerStyle,
       ]}
-      onPress={press}>
+      onPress={(event) => {
+        event && event.preventDefault();
+        Keyboard.dismiss();
+        press && press();
+      }}>
       {loading ? (
         <ActivityIndicator
           color={buttonColors.text}

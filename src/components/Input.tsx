@@ -1,9 +1,11 @@
 import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {TextInput, StyleSheet, View, Text, TextInputProps} from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 //styles
 import Colors from '../styles/Colors';
 import GlobalStyles from '../styles/GlobalStyles';
 import Fonts from '../styles/Fonts';
+import {Controller, FieldError} from 'react-hook-form';
 
 export enum InputType {
   DEFAULT = 'default',
@@ -12,12 +14,18 @@ export enum InputType {
 }
 
 interface IProps {
+  name: string;
+  error?: FieldError;
+  defaultValue?: string;
   placeholder?: string;
   containerStyle?: Object;
   type?: InputType;
   multiline?: boolean;
   inputProps?: TextInputProps;
-  icon?: JSX.Element;
+  icon?: string;
+  control?: any;
+  customValidation?: (value: string) => boolean;
+  customMessage?: string;
 }
 
 export const InputValidations: {
@@ -40,83 +48,73 @@ export const InputValidations: {
   },
 };
 
-const Input: React.FC<IProps> = forwardRef(
-  (
-    {
-      containerStyle,
-      type = InputType.DEFAULT,
-      multiline,
-      placeholder,
-      inputProps,
-      icon,
-    },
-    reference,
-  ) => {
-    const [value, setValue] = useState('');
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+const Input: React.FC<IProps> = ({
+  name,
+  defaultValue,
+  containerStyle,
+  type = InputType.DEFAULT,
+  multiline,
+  placeholder,
+  inputProps,
+  icon,
+  control,
+  error,
+  customValidation,
+  customMessage,
+}) => {
+  const validation = InputValidations[type];
 
-    const setValidity = (error: boolean, message: string = '') => {
-      setError(error);
-      setErrorMessage(message);
-    };
+  const validate = (value: string) => {
+    const v = validation.func(value);
 
-    const validate = (): boolean => {
-      const validationType = InputValidations[type || 'default'];
-      const validate = validationType.func(value);
+    if (v && customValidation) {
+      return customValidation(value) || customMessage;
+    }
 
-      if (!validate) {
-        setValidity(true, validationType.message);
-      } else if (error) {
-        setValidity(false);
-      }
+    return v || validation.message;
+  };
 
-      return value.length !== 0 && validate;
-    };
+  return (
+    <View style={[styles.mainContainer, containerStyle]}>
+      <Controller
+        control={control}
+        render={({onChange, onBlur, value}) => (
+          <View
+            style={[styles.borderedContainer, error && styles.errorContainer]}>
+            <TextInput
+              style={[styles.container, multiline && styles.multiline]}
+              value={value}
+              onChangeText={onChange}
+              selectionColor={Colors.PRIMARY}
+              onBlur={onBlur}
+              secureTextEntry={type === InputType.PASSWORD}
+              multiline={!!multiline}
+              placeholder={placeholder}
+              placeholderTextColor={Colors.LIGHTGRAY}
+              testID="input-id"
+              keyboardType={
+                type === InputType.EMAIL ? 'email-address' : 'default'
+              }
+              autoCapitalize={type === InputType.EMAIL ? 'none' : 'sentences'}
+              {...inputProps}
+            />
 
-    const onFocus = () => {
-      if (error) {
-        setValidity(false);
-      }
-    };
-
-    useImperativeHandle(reference, () => ({
-      getValue: () => {
-        return value;
-      },
-      setValidity,
-      validate,
-    }));
-
-    return (
-      <View style={[styles.mainContainer, containerStyle]}>
-        <View
-          style={[styles.borderedContainer, error && styles.errorContainer]}>
-          <TextInput
-            style={[styles.container, multiline && styles.multiline]}
-            value={value}
-            onChangeText={setValue}
-            selectionColor={Colors.PRIMARY}
-            onFocus={onFocus}
-            onBlur={validate}
-            secureTextEntry={type === InputType.PASSWORD}
-            multiline={!!multiline}
-            placeholder={placeholder}
-            placeholderTextColor={Colors.LIGHTGRAY}
-            testID="input-id"
-            {...inputProps}
-          />
-          {icon}
-        </View>
-        {!!errorMessage && (
-          <Text style={[GlobalStyles.errorText, styles.errorText]}>
-            {errorMessage}
-          </Text>
+            {icon && <Icon name={icon} size={15} color={Colors.PRIMARY} />}
+          </View>
         )}
-      </View>
-    );
-  },
-);
+        name={name}
+        rules={{validate}}
+        defaultValue={defaultValue || ''}
+      />
+
+      {error && (
+        <Text style={[GlobalStyles.errorText, styles.errorText]}>
+          {error.message}
+        </Text>
+      )}
+    </View>
+  );
+};
 
 export default Input;
 

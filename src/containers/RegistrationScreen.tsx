@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import Icon from 'react-native-vector-icons/Feather';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import Auth from '@react-native-firebase/auth';
+import {useForm} from 'react-hook-form';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
@@ -20,10 +21,37 @@ interface IProps {
   route: RouteProp<RootStackParamList, 'RegistrationScreen'>;
 }
 
+type FormData = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 const RegistrationScreen: React.FC<IProps> = ({navigation}) => {
+  const {control, handleSubmit, errors, watch, setError} = useForm<FormData>();
+  const [fetching, setFetching] = useState(false);
+
+  const onSubmit = async (data: FormData) => {
+    try {
+      setFetching(true);
+      await Auth().createUserWithEmailAndPassword(data.email, data.password);
+      setFetching(false);
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        setError('email', {
+          type: 'validate',
+          message: 'User with this email already axists.',
+        });
+      }
+
+      setFetching(false);
+    }
+  };
+
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={styles.containerContent}
+      keyboardShouldPersistTaps={'handled'}
       style={styles.container}>
       <FunctionalIconButton
         iconName="home"
@@ -45,33 +73,44 @@ const RegistrationScreen: React.FC<IProps> = ({navigation}) => {
         useNativeDriver
         duration={700}>
         <Input
-          placeholder={'Name'}
-          type={InputType.DEFAULT}
-          icon={<Icon name="user" size={15} color={Colors.PRIMARY} />}
-          containerStyle={styles.inputMargins}
-        />
-        <Input
+          name="email"
           placeholder={'Email'}
           type={InputType.EMAIL}
-          icon={<Icon name="mail" size={15} color={Colors.PRIMARY} />}
+          icon="mail"
           containerStyle={styles.inputMargins}
+          error={errors.email}
+          control={control}
         />
+
         <Input
+          name="password"
           placeholder={'Password'}
           type={InputType.PASSWORD}
-          icon={<Icon name="key" size={15} color={Colors.PRIMARY} />}
+          icon="key"
           containerStyle={styles.inputMargins}
+          error={errors.password}
+          control={control}
         />
+
         <Input
+          name="confirmPassword"
           placeholder={'Confirm password'}
           type={InputType.PASSWORD}
-          icon={<Icon name="key" size={15} color={Colors.PRIMARY} />}
+          icon="key"
           containerStyle={styles.inputMargins}
+          error={errors.confirmPassword}
+          control={control}
+          customValidation={(value) => watch('password') === value}
+          customMessage="Passwords don't match."
         />
+
         <Button
           title="Sign up"
           type={ButtonType.SECONDARY}
           containerStyle={styles.buttonMargins}
+          onPress={handleSubmit(onSubmit)}
+          pressWithDebounce
+          loading={fetching}
         />
 
         <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
