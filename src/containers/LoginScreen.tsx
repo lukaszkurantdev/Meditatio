@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Feather';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
@@ -21,7 +22,9 @@ interface IProps {
 
 const LoginScreen: React.FC<IProps> = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <KeyboardAwareScrollView
+      contentContainerStyle={styles.containerContent}
+      style={styles.container}>
       <FunctionalIconButton
         iconName="home"
         size={20}
@@ -66,7 +69,7 @@ const LoginScreen: React.FC<IProps> = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </Animatable.View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -75,9 +78,11 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.BACKGROUND,
+  },
+  containerContent: {
     paddingHorizontal: 20,
     paddingTop: 50,
-    backgroundColor: Colors.BACKGROUND,
   },
   logoContainer: {
     height: 60,
