@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   containerContent: {
     paddingHorizontal: 20,
-    paddingTop: 50,
+    paddingVertical: 50,
   },
   logoContainer: {
     height: 60,
