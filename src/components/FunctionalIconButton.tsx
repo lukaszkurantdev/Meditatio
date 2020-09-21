@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, ViewStyle} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/EvilIcons';
 import {debounce} from 'ts-debounce';
 
 import Colors from '../styles/Colors';

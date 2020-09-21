@@ -36,7 +36,7 @@ const WelcomeScreen: React.FC<IProps> = ({navigation}) => {
       />
       <View style={styles.container}>
         <View style={[styles.partContainer]}>
-          <MandalaAnimatedLogo />
+          <MandalaAnimatedLogo withAnimation />
           <Text style={[GlobalStyles.logoText, styles.logoText]}>
             meditatio
           </Text>
