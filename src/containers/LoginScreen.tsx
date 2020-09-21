@@ -16,6 +16,7 @@ import Button, {ButtonType} from '../components/Button';
 import GlobalStyles from '../styles/GlobalStyles';
 import Colors from '../styles/Colors';
 import FunctionalIconButton from '../components/FunctionalIconButton';
+import MandalaAnimatedLogo from '../components/MandalaAnimatedLogo';
 
 interface IProps {
   navigation: StackNavigationProp<RootStackParamList, 'LoginScreen'>;
@@ -28,7 +29,7 @@ type FormData = {
 };
 
 const LoginScreen: React.FC<IProps> = ({navigation}) => {
-  const {control, handleSubmit, errors, watch, setError} = useForm<FormData>();
+  const {control, handleSubmit, errors, setError} = useForm<FormData>();
   const [fetching, setFetching] = useState(false);
 
   const onSubmit = async (data: FormData) => {
@@ -67,12 +68,9 @@ const LoginScreen: React.FC<IProps> = ({navigation}) => {
       contentContainerStyle={styles.containerContent}
       keyboardShouldPersistTaps={'handled'}
       style={styles.container}>
-      <FunctionalIconButton
-        iconName="home"
-        size={20}
-        iconColor={Colors.PRIMARY}
-        onPress={navigation.goBack}
-      />
+      <View style={styles.iconContainer}>
+        <MandalaAnimatedLogo isSmall color={Colors.PRIMARY} />
+      </View>
 
       <View style={styles.headerMargins}>
         <Text style={GlobalStyles.hugeText}>Sign in</Text>
@@ -160,5 +158,9 @@ const styles = StyleSheet.create({
   },
   highlight: {
     color: Colors.PRIMARY,
+  },
+  iconContainer: {
+    height: 40,
+    width: 40,
   },
 });

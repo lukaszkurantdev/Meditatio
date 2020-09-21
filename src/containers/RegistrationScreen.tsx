@@ -15,6 +15,7 @@ import Button, {ButtonType} from '../components/Button';
 import GlobalStyles from '../styles/GlobalStyles';
 import Colors from '../styles/Colors';
 import FunctionalIconButton from '../components/FunctionalIconButton';
+import MandalaAnimatedLogo from '../components/MandalaAnimatedLogo';
 
 interface IProps {
   navigation: StackNavigationProp<RootStackParamList, 'RegistrationScreen'>;
@@ -53,12 +54,9 @@ const RegistrationScreen: React.FC<IProps> = ({navigation}) => {
       contentContainerStyle={styles.containerContent}
       keyboardShouldPersistTaps={'handled'}
       style={styles.container}>
-      <FunctionalIconButton
-        iconName="home"
-        size={20}
-        iconColor={Colors.PRIMARY}
-        onPress={navigation.goBack}
-      />
+      <View style={styles.iconContainer}>
+        <MandalaAnimatedLogo isSmall color={Colors.PRIMARY} />
+      </View>
 
       <View style={styles.headerMargins}>
         <Text style={GlobalStyles.hugeText}>Sign up</Text>
@@ -158,5 +156,9 @@ const styles = StyleSheet.create({
   },
   highlight: {
     color: Colors.PRIMARY,
+  },
+  iconContainer: {
+    height: 40,
+    width: 40,
   },
 });

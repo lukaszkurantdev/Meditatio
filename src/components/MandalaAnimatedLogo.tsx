@@ -4,10 +4,16 @@ import MandalaLogo from '../assets/svg/MandalaLogo';
 
 interface IProps {
   isSmall?: boolean;
+  color?: string;
+  withAnimation?: boolean;
 }
 
-const MandalaAnimatedLogo: React.FC<IProps> = ({isSmall}) => {
-  const [value] = useState(new Animated.Value(0));
+const MandalaAnimatedLogo: React.FC<IProps> = ({
+  isSmall,
+  color,
+  withAnimation,
+}) => {
+  const [value] = useState(new Animated.Value(withAnimation ? 0 : 1));
 
   const rotate = value.interpolate({
     inputRange: [0, 1],
@@ -29,7 +35,7 @@ const MandalaAnimatedLogo: React.FC<IProps> = ({isSmall}) => {
 
   return (
     <Animated.View style={{transform: [{scale}, {rotate}]}}>
-      <MandalaLogo isSmall={isSmall} />
+      <MandalaLogo isSmall={isSmall} color={color} />
     </Animated.View>
   );
 };

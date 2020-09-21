@@ -8,11 +8,13 @@ import {
 import WelcomeScreen from '../containers/WelcomeScreen';
 import LoginScreen from '../containers/LoginScreen';
 import RegistrationScreen from '../containers/RegistrationScreen';
+import UserTabContainer from './UserTabContainer';
 
 export type RootStackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
   RegistrationScreen: undefined;
+  UserTabContainer: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -52,7 +54,10 @@ const MainStackNavigator = () => {
           </>
         ) : (
           <>
-            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+            <Stack.Screen
+              name="UserTabContainer"
+              component={UserTabContainer}
+            />
           </>
         )}
       </Stack.Navigator>
