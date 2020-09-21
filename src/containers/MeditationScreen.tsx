@@ -46,12 +46,12 @@ const Meditations = [
 ];
 
 const MeditationScreen: React.FC<IProps> = ({}) => {
-  let myCustomAnimatedValue = new Animated.Value(0);
+  let scrollAnimatedValue = new Animated.Value(0);
 
   const getPageTransformStyle = () => ({
     transform: [
       {
-        rotate: myCustomAnimatedValue.interpolate({
+        rotate: scrollAnimatedValue.interpolate({
           inputRange: [0, WIDTH, WIDTH * 2],
           outputRange: ['60deg', '0deg', '-60deg'],
           extrapolate: 'clamp',
@@ -64,7 +64,7 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
     const startValue = WIDTH * index;
     const halfOfWidth = WIDTH / 2;
     return {
-      opacity: myCustomAnimatedValue.interpolate({
+      opacity: scrollAnimatedValue.interpolate({
         inputRange: [
           startValue - halfOfWidth,
           startValue,
@@ -79,7 +79,7 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
     <View>
       <ParallaxSwiper
         speed={0.7}
-        animatedValue={myCustomAnimatedValue}
+        animatedValue={scrollAnimatedValue}
         dividerWidth={1}
         dividerColor="black"
         backgroundColor="black">
@@ -95,7 +95,12 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
             ForegroundComponent={
               <View style={styles.itemPage}>
                 <View style={styles.itemTitle}>
-                  <FunctionalIconButton iconName="chevron-left" size={35} />
+                  <FunctionalIconButton
+                    iconName="chevron-left"
+                    size={35}
+                    containerStyle={index === 0 && styles.hiddenButton}
+                  />
+
                   <Animated.Text
                     style={[
                       GlobalStyles.logoText,
@@ -103,7 +108,14 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
                     ]}>
                     {value.name}
                   </Animated.Text>
-                  <FunctionalIconButton iconName="chevron-right" size={35} />
+
+                  <FunctionalIconButton
+                    iconName="chevron-right"
+                    size={35}
+                    containerStyle={
+                      Meditations.length - 1 === index && styles.hiddenButton
+                    }
+                  />
                 </View>
               </View>
             }
@@ -113,7 +125,7 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
 
       <View style={styles.headerContainer}>
         <Text style={GlobalStyles.hugeText}>Meditation</Text>
-        <Text style={[GlobalStyles.standardText, {paddingVertical: 10}]}>
+        <Text style={[GlobalStyles.standardText, styles.descText]}>
           Choose theme to start your contemplation
         </Text>
       </View>
@@ -173,5 +185,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255,255,255,0.1)',
+  },
+  descText: {
+    paddingVertical: 10,
+  },
+  hiddenButton: {
+    opacity: 0,
   },
 });
