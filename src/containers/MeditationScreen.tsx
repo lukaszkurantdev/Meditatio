@@ -18,6 +18,7 @@ import {ParallaxSwiper, ParallaxSwiperPage} from 'react-native-parallax-swiper';
 import Colors from '../styles/Colors';
 import MandalaAnimatedLogo from '../components/MandalaAnimatedLogo';
 import FunctionalIconButton from '../components/FunctionalIconButton';
+import {ShuffleArray} from '../utilities/ShuffleArray';
 
 interface IProps {
   navigation: StackNavigationProp<MainUserTabParamList, 'MeditationScreen'>;
@@ -27,7 +28,7 @@ interface IProps {
 const WIDTH = Dimensions.get('screen').width;
 const HEIGHT = Dimensions.get('screen').height;
 
-const Meditations = [
+const Meditations = ShuffleArray([
   {
     name: 'Mountain night',
     image: require('../assets/images/background_main.jpg'),
@@ -40,25 +41,37 @@ const Meditations = [
   },
   {
     name: 'Gretting the sun',
-    image: require('../assets/images/background3.jpg'),
+    image: require('../assets/images/background5.jpg'),
     mandalaColor: Colors.DANGER,
   },
-];
+  {
+    name: 'Inside the woods',
+    image: require('../assets/images/background4.jpg'),
+    mandalaColor: Colors.DANGER,
+  },
+  {
+    name: 'Buddha prayer',
+    image: require('../assets/images/background6.jpg'),
+    mandalaColor: Colors.DANGER,
+  },
+]);
 
 const MeditationScreen: React.FC<IProps> = ({}) => {
   let scrollAnimatedValue = new Animated.Value(0);
 
-  const getPageTransformStyle = () => ({
-    transform: [
-      {
-        rotate: scrollAnimatedValue.interpolate({
-          inputRange: [0, WIDTH, WIDTH * 2],
-          outputRange: ['60deg', '0deg', '-60deg'],
-          extrapolate: 'clamp',
-        }),
-      },
-    ],
-  });
+  const getPageTransformStyle = () => {
+    return {
+      transform: [
+        {
+          rotate: scrollAnimatedValue.interpolate({
+            inputRange: Meditations.map((_, index) => index * WIDTH),
+            outputRange: Meditations.map((_, index) => `-${index * 60}deg`),
+            extrapolate: 'clamp',
+          }),
+        },
+      ],
+    };
+  };
 
   const getMeditationTitleStyle = (index: number) => {
     const startValue = WIDTH * index;
