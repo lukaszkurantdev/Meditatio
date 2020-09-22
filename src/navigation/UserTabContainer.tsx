@@ -6,6 +6,7 @@ import WelcomeScreen from '../containers/WelcomeScreen';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {ImageBackground, StatusBar, View} from 'react-native';
 import MeditationScreen from '../containers/MeditationScreen';
+import SettingsScreen from '../containers/SettingsScreen';
 
 export type MainUserTabParamList = {
   MeditationScreen: undefined;
@@ -20,6 +21,7 @@ const UserTabContainer = () => {
     <NavigationContainer independent>
       <StatusBar translucent backgroundColor="transparent" />
       <Tab.Navigator
+        lazy
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, color}) => {
             let iconName: string = '';
@@ -47,16 +49,17 @@ const UserTabContainer = () => {
             elevation: 0,
           },
           style: {
+            elevation: 0,
             height: 60,
             position: 'absolute',
-            backgroundColor: 'rgba(255,255,255,0.01)',
+            backgroundColor: 'rgba(255,255,255,0.1)',
             borderWidth: 0,
             borderTopColor: 'rgba(255,255,255,0.1)',
           },
         }}>
         <Tab.Screen name="MeditationScreen" component={MeditationScreen} />
         <Tab.Screen name="StatisticsScreen" component={WelcomeScreen} />
-        <Tab.Screen name="SettingsScreen" component={WelcomeScreen} />
+        <Tab.Screen name="SettingsScreen" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
