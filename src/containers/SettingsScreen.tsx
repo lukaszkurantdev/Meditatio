@@ -4,32 +4,42 @@ import {StyleSheet, ImageBackground, View, Text} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {MainUserTabParamList} from '../navigation/UserTabContainer';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import GlobalStyles from '../styles/GlobalStyles';
+import Colors from '../styles/Colors';
+import MenuButton from '../components/MenuButton';
+import MenuSection from '../components/MenuSection';
+import AppHeader from '../components/AppHeader';
 
 interface IProps {
   navigation: StackNavigationProp<MainUserTabParamList, 'MeditationScreen'>;
   route: RouteProp<MainUserTabParamList, 'MeditationScreen'>;
 }
 
-const SettingsScreen: React.FC<IProps> = ({navigation}) => {
+const SettingsScreen: React.FC<IProps> = ({}) => {
   return (
-    <ImageBackground
-      source={require('../assets/images/background.jpg')}
-      blurRadius={1}
-      style={styles.mainContainer}>
-      <ScrollView style={styles.scrollPadding}>
-        <View>
-          <Text style={GlobalStyles.hugeText}>Settings</Text>
-          <Text style={[GlobalStyles.standardText]}></Text>
-        </View>
+    <View style={styles.mainContainer}>
+      <ScrollView contentContainerStyle={styles.scrollPadding}>
+        <AppHeader title="Settings" description="Control yourself" />
 
-        <View style={styles.sectionContainer}></View>
-        <View style={styles.sectionContainer}></View>
-        <View style={styles.sectionContainer}></View>
-        <View style={styles.sectionContainer}></View>
+        <MenuSection title="General">
+          <MenuButton title="Daily reminder" iconName="clock" />
+          <MenuButton title="Language" iconName="globe" />
+        </MenuSection>
+
+        <MenuSection title="Sounds">
+          <MenuButton title="Music during meditation" iconName="volume-2" />
+          <MenuButton title="Stop signal" iconName="stop-circle" />
+        </MenuSection>
+
+        <MenuSection title="Others">
+          <MenuButton title="Connected device" iconName="watch" />
+          <MenuButton title="Rate application" iconName="star" />
+          <MenuButton title="Privacy Policy & Rules" iconName="info" />
+          <MenuButton title="Log out" iconName="log-out" />
+        </MenuSection>
       </ScrollView>
-    </ImageBackground>
+    </View>
   );
 };
 
@@ -38,15 +48,11 @@ export default SettingsScreen;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    paddingBottom: 60,
+    backgroundColor: Colors.BACKGROUND,
   },
   scrollPadding: {
-    paddingVertical: 80,
+    paddingVertical: 60,
     paddingHorizontal: 20,
-  },
-  sectionContainer: {
-    borderRadius: 15,
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    height: 200,
-    marginVertical: 10,
   },
 });

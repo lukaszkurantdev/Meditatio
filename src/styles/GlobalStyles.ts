@@ -28,6 +28,11 @@ const GlobalStyles = StyleSheet.create({
     fontSize: 13,
     color: Colors.DANGER,
   },
+  sectionHeaderText: {
+    fontFamily: Fonts.MEDIUM,
+    fontSize: 20,
+    color: Colors.WHITE,
+  },
 });
 
 export default GlobalStyles;
