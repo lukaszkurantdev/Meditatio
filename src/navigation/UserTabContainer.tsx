@@ -1,12 +1,15 @@
+import React from 'react';
+import {StatusBar} from 'react-native';
+
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import React from 'react';
+
 import Colors from '../styles/Colors';
-import WelcomeScreen from '../containers/WelcomeScreen';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import {ImageBackground, StatusBar, View} from 'react-native';
+
 import MeditationScreen from '../containers/MeditationScreen';
 import SettingsScreen from '../containers/SettingsScreen';
+import StatisticsScreen from '../containers/StatisticsScreen';
 
 export type MainUserTabParamList = {
   MeditationScreen: undefined;
@@ -58,7 +61,7 @@ const UserTabContainer = () => {
           },
         }}>
         <Tab.Screen name="MeditationScreen" component={MeditationScreen} />
-        <Tab.Screen name="StatisticsScreen" component={WelcomeScreen} />
+        <Tab.Screen name="StatisticsScreen" component={StatisticsScreen} />
         <Tab.Screen name="SettingsScreen" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>

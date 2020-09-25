@@ -7,7 +7,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 interface MenuButtonProps {
   rightContent?: JSX.Element;
   onPress?: () => void;
-  iconName: string;
+  iconName?: string;
   title: string;
 }
 
@@ -18,14 +18,19 @@ const MenuButton: React.FC<MenuButtonProps> = ({
   title,
 }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      activeOpacity={!!onPress ? 0.5 : 1}>
       <View style={styles.insideContainer}>
-        <Icon
-          name={iconName}
-          size={20}
-          color={Colors.PRIMARY}
-          style={styles.icon}
-        />
+        {iconName && (
+          <Icon
+            name={iconName}
+            size={20}
+            color={Colors.PRIMARY}
+            style={styles.icon}
+          />
+        )}
         <Text style={[GlobalStyles.standardText, styles.title]}>{title}</Text>
       </View>
       {rightContent}
