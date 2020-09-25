@@ -26,7 +26,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({
           color={Colors.PRIMARY}
           style={styles.icon}
         />
-        <Text style={GlobalStyles.standardText}>{title}</Text>
+        <Text style={[GlobalStyles.standardText, styles.title]}>{title}</Text>
       </View>
       {rightContent}
     </TouchableOpacity>
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
   },
   insideContainer: {
     flexDirection: 'row',
@@ -49,5 +48,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
+  },
+  title: {
+    opacity: 0.8,
   },
 });
