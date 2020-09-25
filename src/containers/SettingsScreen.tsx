@@ -4,8 +4,10 @@ import {StyleSheet, ImageBackground, View, Text} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {MainUserTabParamList} from '../navigation/UserTabContainer';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import GlobalStyles from '../styles/GlobalStyles';
+import Colors from '../styles/Colors';
+import MenuButton from '../components/MenuButton';
 
 interface IProps {
   navigation: StackNavigationProp<MainUserTabParamList, 'MeditationScreen'>;
@@ -24,7 +26,11 @@ const SettingsScreen: React.FC<IProps> = ({navigation}) => {
           <Text style={[GlobalStyles.standardText]}></Text>
         </View>
 
-        <View style={styles.sectionContainer}></View>
+        <View style={styles.sectionContainer}>
+          <Text style={GlobalStyles.headerText}>General</Text>
+          <MenuButton title="Daily reminder" iconName="user" />
+          <MenuButton title="Daily reminder" iconName="user" />
+        </View>
         <View style={styles.sectionContainer}></View>
         <View style={styles.sectionContainer}></View>
         <View style={styles.sectionContainer}></View>
