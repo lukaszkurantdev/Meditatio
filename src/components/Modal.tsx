@@ -12,9 +12,16 @@ interface IProps {
   visible: boolean;
   style?: Object;
   closeModal?: () => void;
+  title?: string;
 }
 
-const Modal: React.FC<IProps> = ({visible, closeModal, style}) => {
+const Modal: React.FC<IProps> = ({
+  visible,
+  closeModal,
+  style,
+  title,
+  children,
+}) => {
   const deviceWidth = Dimensions.get('window').width;
   const deviceHeight =
     Platform.OS === 'ios'
@@ -22,10 +29,6 @@ const Modal: React.FC<IProps> = ({visible, closeModal, style}) => {
       : require('react-native-extra-dimensions-android').get(
           'REAL_WINDOW_HEIGHT',
         );
-
-  const onPressBack = () => {
-    debounce(closeModal, 300);
-  };
 
   return (
     <ModalLib
@@ -41,19 +44,19 @@ const Modal: React.FC<IProps> = ({visible, closeModal, style}) => {
       backdropTransitionOutTiming={300}
       deviceHeight={deviceHeight}
       deviceWidth={deviceWidth}
-      onBackdropPress={onPressBack}
-      onBackButtonPress={onPressBack}
+      onBackdropPress={closeModal}
+      onBackButtonPress={closeModal}
       style={[styles.container]}
       //@ts-ignore // Mising property in ts definitions
-      statusBarTranslucent
-      propagateSwipe={false}>
-      <View style={[styles.insideContainer, style]}>
+      statusBarTranslucent>
+      <View style={styles.insideContainer}>
         <View style={styles.headerContainer}>
-          <Text style={GlobalStyles.headerText}>Header</Text>
-          <TouchableOpacity onPress={onPressBack}>
+          <Text style={GlobalStyles.headerText}>{title}</Text>
+          <TouchableOpacity onPress={() => closeModal()}>
             <Icon name="x" size={25} color={Colors.PRIMARY} />
           </TouchableOpacity>
         </View>
+        <View style={style}>{children}</View>
       </View>
     </ModalLib>
   );

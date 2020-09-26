@@ -11,6 +11,7 @@ import Colors from '../styles/Colors';
 import MenuButton from '../components/MenuButton';
 import MenuSection from '../components/MenuSection';
 import AppHeader from '../components/AppHeader';
+import ListPicker from '../components/ListPicker';
 
 interface IProps {
   navigation: StackNavigationProp<MainUserTabParamList, 'MeditationScreen'>;
@@ -29,7 +30,21 @@ const SettingsScreen: React.FC<IProps> = ({}) => {
 
         <MenuSection title="General">
           <MenuButton title="Daily reminder" iconName="clock" />
-          <MenuButton title="Language" iconName="globe" />
+          <MenuButton
+            title="Language"
+            iconName="globe"
+            rightContent={
+              <ListPicker
+                modalTitle="Language"
+                items={[
+                  {value: 'x', label: 'Sample'},
+                  {value: 'x', label: 'Sample'},
+                  {value: 'x', label: 'Sample'},
+                  {value: 'x', label: 'Sample'},
+                ]}
+              />
+            }
+          />
         </MenuSection>
 
         <MenuSection title="Sounds">
