@@ -76,7 +76,12 @@ const styles = StyleSheet.create({
   icon: {
     marginLeft: 5,
   },
-
+  picker: {
+    width: '100%',
+    height: 150,
+    marginTop: 20,
+    marginBottom: 15,
+  },
   modalContainer: {
     alignItems: 'center',
   },
