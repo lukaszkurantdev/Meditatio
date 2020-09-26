@@ -1,14 +1,11 @@
-import React from 'react';
-import {useState} from 'react';
-import {Text, StyleSheet} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/Feather';
-import Colors from '../styles/Colors';
-import GlobalStyles from '../styles/GlobalStyles';
-import Modal from './Modal';
-import {TimePicker as TimePickerComponent} from 'react-native-wheel-picker-android';
-import Button, {ButtonType} from './Button';
+import React, {useState} from 'react';
+import {StyleSheet} from 'react-native';
 import moment from 'moment';
+
+import {TimePicker as TimePickerComponent} from 'react-native-wheel-picker-android';
+import Picker from './Picker';
+
+import Colors from '../styles/Colors';
 
 interface IProps {
   modalTitle?: string;
@@ -16,40 +13,21 @@ interface IProps {
 }
 
 const TimePicker: React.FC<IProps> = ({modalTitle, onChangeItem}) => {
-  const [value, setValue] = useState<Date>(null);
-  const [selectedValue, setSelectedValue] = useState<Date>(new Date());
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [value, setValue] = useState<Date>();
 
-  const toggleModalVisible = () =>
-    setModalVisible((previousState) => !previousState);
-
-  const onSaveItem = () => {
-    setValue(selectedValue);
-    onChangeItem && onChangeItem(selectedValue);
-    toggleModalVisible();
+  const onSaveItem = (value: Date) => {
+    setValue(value);
+    onChangeItem && onChangeItem(value);
   };
 
   return (
-    <>
-      <TouchableOpacity style={styles.container} onPress={toggleModalVisible}>
-        <Text style={GlobalStyles.standardText}>
-          {value ? moment(value).format('HH:mm') : 'Not selected'}
-        </Text>
-        <Icon
-          name="chevron-down"
-          size={25}
-          color={Colors.PRIMARY}
-          style={styles.icon}
-        />
-      </TouchableOpacity>
-
-      <Modal
-        visible={modalVisible}
-        closeModal={toggleModalVisible}
-        title={modalTitle}
-        style={styles.modalContainer}>
+    <Picker<Date>
+      modalTitle={modalTitle}
+      onChangeItem={onSaveItem}
+      valueToShow={value ? moment(value).format('HH:mm') : 'Not selected'}>
+      {(onChange) => (
         <TimePickerComponent
-          onTimeSelected={(date) => setSelectedValue(date)}
+          onTimeSelected={onChange}
           selectedItemTextFontFamily={'Roboto'}
           itemTextFontFamily={'Roboto'}
           style={styles.picker}
@@ -58,34 +36,18 @@ const TimePicker: React.FC<IProps> = ({modalTitle, onChangeItem}) => {
           selectedItemTextColor={Colors.PRIMARY}
           format24
         />
-        <Button
-          title="Select"
-          type={ButtonType.SECONDARY}
-          onPress={onSaveItem}
-          pressWithDebounce
-        />
-      </Modal>
-    </>
+      )}
+    </Picker>
   );
 };
 
 export default TimePicker;
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  icon: {
-    marginLeft: 5,
-  },
   picker: {
     width: 150,
     height: 150,
     marginTop: 20,
     marginBottom: 15,
-  },
-  modalContainer: {
-    alignItems: 'center',
   },
 });
