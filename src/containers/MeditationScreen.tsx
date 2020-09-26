@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {
   ImageBackground,
   View,
@@ -19,6 +19,7 @@ import Colors from '../styles/Colors';
 import MandalaAnimatedLogo from '../components/MandalaAnimatedLogo';
 import FunctionalIconButton from '../components/FunctionalIconButton';
 import {ShuffleArray} from '../utilities/ShuffleArray';
+import AppHeader from '../components/AppHeader';
 
 interface IProps {
   navigation: StackNavigationProp<MainUserTabParamList, 'MeditationScreen'>;
@@ -58,6 +59,7 @@ const Meditations = ShuffleArray([
 
 const MeditationScreen: React.FC<IProps> = ({}) => {
   let scrollAnimatedValue = new Animated.Value(0);
+  const swiper = useRef<ParallaxSwiper>(null);
 
   const getPageTransformStyle = () => {
     return {
@@ -88,9 +90,14 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
     };
   };
 
+  const scrollToPage = (index: number) => {
+    swiper.current?.scrollToIndex(index);
+  };
+
   return (
     <View>
       <ParallaxSwiper
+        ref={swiper}
         speed={0.7}
         animatedValue={scrollAnimatedValue}
         dividerWidth={1}
@@ -112,6 +119,7 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
                     iconName="chevron-left"
                     size={35}
                     containerStyle={index === 0 && styles.hiddenButton}
+                    onPress={() => scrollToPage(index - 1)}
                   />
 
                   <Animated.Text
@@ -128,6 +136,7 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
                     containerStyle={
                       Meditations.length - 1 === index && styles.hiddenButton
                     }
+                    onPress={() => scrollToPage(index + 1)}
                   />
                 </View>
               </View>
@@ -137,10 +146,10 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
       </ParallaxSwiper>
 
       <View style={styles.headerContainer}>
-        <Text style={GlobalStyles.hugeText}>Meditation</Text>
-        <Text style={[GlobalStyles.standardText, styles.descText]}>
-          Choose theme to start your contemplation
-        </Text>
+        <AppHeader
+          title="Meditation"
+          description="Choose theme to start your contemplation"
+        />
       </View>
 
       <View style={styles.mandalaContainer}>
@@ -162,7 +171,7 @@ const styles = StyleSheet.create({
   },
   itemPage: {
     padding: 20,
-    paddingTop: 80,
+    paddingTop: 60,
     flex: 1,
   },
   itemTitle: {
@@ -176,7 +185,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     position: 'absolute',
-    top: 80,
+    top: 60,
     right: 20,
     left: 20,
   },
@@ -198,9 +207,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255,255,255,0.1)',
-  },
-  descText: {
-    paddingVertical: 10,
   },
   hiddenButton: {
     opacity: 0,

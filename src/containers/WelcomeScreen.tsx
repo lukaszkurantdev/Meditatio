@@ -2,7 +2,6 @@ import React from 'react';
 import {View, StyleSheet, StatusBar, Text} from 'react-native';
 import Video from 'react-native-video';
 import * as Animatable from 'react-native-animatable';
-import Auth from '@react-native-firebase/auth';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
@@ -17,6 +16,7 @@ import GoogleLogo from '../assets/svg/GoogleLogo';
 import GlobalStyles from '../styles/GlobalStyles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Colors from '../styles/Colors';
+import Modal from '../components/Modal';
 
 interface IProps {
   navigation: StackNavigationProp<RootStackParamList, 'WelcomeScreen'>;
@@ -52,7 +52,6 @@ const WelcomeScreen: React.FC<IProps> = ({navigation}) => {
             title="Continue with Google"
             type={ButtonType.SECONDARY}
             icon={<GoogleLogo />}
-            onPress={() => Auth().signOut()}
           />
 
           <Button
@@ -76,6 +75,8 @@ const WelcomeScreen: React.FC<IProps> = ({navigation}) => {
           </TouchableOpacity>
         </Animatable.View>
       </View>
+
+      <Modal visible />
     </>
   );
 };

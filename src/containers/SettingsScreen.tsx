@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, ImageBackground, View, Text} from 'react-native';
+import Auth from '@react-native-firebase/auth';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
@@ -36,7 +37,11 @@ const SettingsScreen: React.FC<IProps> = ({}) => {
           <MenuButton title="Connected device" iconName="watch" />
           <MenuButton title="Rate application" iconName="star" />
           <MenuButton title="Privacy Policy & Rules" iconName="info" />
-          <MenuButton title="Log out" iconName="log-out" />
+          <MenuButton
+            title="Log out"
+            iconName="log-out"
+            onPress={() => Auth().signOut()}
+          />
         </MenuSection>
       </ScrollView>
     </View>
