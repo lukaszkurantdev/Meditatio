@@ -12,6 +12,7 @@ import MenuButton from '../components/MenuButton';
 import MenuSection from '../components/MenuSection';
 import AppHeader from '../components/AppHeader';
 import ListPicker from '../components/ListPicker';
+import TimePicker from '../components/TimePicker';
 
 interface IProps {
   navigation: StackNavigationProp<MainUserTabParamList, 'MeditationScreen'>;
@@ -29,7 +30,11 @@ const SettingsScreen: React.FC<IProps> = ({}) => {
         <AppHeader title="Settings" description="Control yourself" />
 
         <MenuSection title="General">
-          <MenuButton title="Daily reminder" iconName="clock" />
+          <MenuButton
+            title="Daily reminder"
+            iconName="clock"
+            rightContent={<TimePicker modalTitle="Daily reminder time" />}
+          />
           <MenuButton
             title="Language"
             iconName="globe"
