@@ -1,5 +1,6 @@
-import React from 'react';
-import {StyleSheet, ImageBackground, View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, ImageBackground, View, Text, Switch} from 'react-native';
+import Auth from '@react-native-firebase/auth';
 
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
@@ -10,6 +11,8 @@ import Colors from '../styles/Colors';
 import MenuButton from '../components/MenuButton';
 import MenuSection from '../components/MenuSection';
 import AppHeader from '../components/AppHeader';
+import ListPicker from '../components/ListPicker';
+import TimePicker from '../components/TimePicker';
 
 interface IProps {
   navigation: StackNavigationProp<MainUserTabParamList, 'MeditationScreen'>;
@@ -17,18 +20,52 @@ interface IProps {
 }
 
 const SettingsScreen: React.FC<IProps> = ({}) => {
+  const [isMusicEnabled, setIsMusicEnabled] = useState(false);
+  const toggleSwitch = () =>
+    setIsMusicEnabled((previousState) => !previousState);
+
   return (
     <View style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scrollPadding}>
         <AppHeader title="Settings" description="Control yourself" />
 
         <MenuSection title="General">
-          <MenuButton title="Daily reminder" iconName="clock" />
-          <MenuButton title="Language" iconName="globe" />
+          <MenuButton
+            title="Daily reminder"
+            iconName="clock"
+            rightContent={<TimePicker modalTitle="Daily reminder time" />}
+          />
+          <MenuButton
+            title="Language"
+            iconName="globe"
+            rightContent={
+              <ListPicker
+                modalTitle="Language"
+                items={[
+                  {value: 'x', label: 'Sample'},
+                  {value: 'x', label: 'Sample'},
+                  {value: 'x', label: 'Sample'},
+                  {value: 'x', label: 'Sample'},
+                ]}
+              />
+            }
+          />
         </MenuSection>
 
         <MenuSection title="Sounds">
-          <MenuButton title="Music during meditation" iconName="volume-2" />
+          <MenuButton
+            title="Music during meditation"
+            iconName="volume-2"
+            rightContent={
+              <Switch
+                trackColor={{false: Colors.BACKGROUND, true: Colors.BACKGROUND}}
+                thumbColor={isMusicEnabled ? Colors.PRIMARY : '#f4f3f4'}
+                ios_backgroundColor={Colors.BACKGROUND}
+                onValueChange={toggleSwitch}
+                value={isMusicEnabled}
+              />
+            }
+          />
           <MenuButton title="Stop signal" iconName="stop-circle" />
         </MenuSection>
 
@@ -36,7 +73,11 @@ const SettingsScreen: React.FC<IProps> = ({}) => {
           <MenuButton title="Connected device" iconName="watch" />
           <MenuButton title="Rate application" iconName="star" />
           <MenuButton title="Privacy Policy & Rules" iconName="info" />
-          <MenuButton title="Log out" iconName="log-out" />
+          <MenuButton
+            title="Log out"
+            iconName="log-out"
+            onPress={() => Auth().signOut()}
+          />
         </MenuSection>
       </ScrollView>
     </View>
