@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, ImageBackground, View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, ImageBackground, View, Text, Switch} from 'react-native';
 import Auth from '@react-native-firebase/auth';
 
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -18,6 +18,10 @@ interface IProps {
 }
 
 const SettingsScreen: React.FC<IProps> = ({}) => {
+  const [isMusicEnabled, setIsMusicEnabled] = useState(false);
+  const toggleSwitch = () =>
+    setIsMusicEnabled((previousState) => !previousState);
+
   return (
     <View style={styles.mainContainer}>
       <ScrollView contentContainerStyle={styles.scrollPadding}>
@@ -29,7 +33,19 @@ const SettingsScreen: React.FC<IProps> = ({}) => {
         </MenuSection>
 
         <MenuSection title="Sounds">
-          <MenuButton title="Music during meditation" iconName="volume-2" />
+          <MenuButton
+            title="Music during meditation"
+            iconName="volume-2"
+            rightContent={
+              <Switch
+                trackColor={{false: Colors.BACKGROUND, true: Colors.BACKGROUND}}
+                thumbColor={isMusicEnabled ? Colors.PRIMARY : '#f4f3f4'}
+                ios_backgroundColor={Colors.BACKGROUND}
+                onValueChange={toggleSwitch}
+                value={isMusicEnabled}
+              />
+            }
+          />
           <MenuButton title="Stop signal" iconName="stop-circle" />
         </MenuSection>
 

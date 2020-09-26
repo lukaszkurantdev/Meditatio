@@ -75,8 +75,6 @@ const WelcomeScreen: React.FC<IProps> = ({navigation}) => {
           </TouchableOpacity>
         </Animatable.View>
       </View>
-
-      <Modal visible />
     </>
   );
 };
