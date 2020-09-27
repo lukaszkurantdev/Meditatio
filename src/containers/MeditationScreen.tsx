@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   Animated,
+  TouchableOpacity,
 } from 'react-native';
 
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -57,7 +58,7 @@ const Meditations = ShuffleArray([
   },
 ]);
 
-const MeditationScreen: React.FC<IProps> = ({}) => {
+const MeditationScreen: React.FC<IProps> = ({navigation}) => {
   let scrollAnimatedValue = new Animated.Value(0);
   const swiper = useRef<ParallaxSwiper>(null);
 
@@ -92,6 +93,16 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
 
   const scrollToPage = (index: number) => {
     swiper.current?.scrollToIndex(index);
+  };
+
+  const navigateToSession = () => {
+    navigation.dangerouslyGetParent().navigate('SessionScreen', {
+      meditation: {
+        background: require('../assets/images/background_main.jpg'),
+        music: '',
+        duration: 10000,
+      },
+    });
   };
 
   return (
@@ -155,7 +166,9 @@ const MeditationScreen: React.FC<IProps> = ({}) => {
       <View style={styles.mandalaContainer}>
         <Animated.View
           style={[styles.mandalaInsideContainer, getPageTransformStyle()]}>
-          <MandalaAnimatedLogo withAnimation />
+          <TouchableOpacity onPress={navigateToSession}>
+            <MandalaAnimatedLogo withAnimation />
+          </TouchableOpacity>
         </Animated.View>
       </View>
     </View>
