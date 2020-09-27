@@ -5,16 +5,20 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
+import {MeditationSession} from '../models/MeditationSession.model';
+
 import WelcomeScreen from '../containers/WelcomeScreen';
 import LoginScreen from '../containers/LoginScreen';
 import RegistrationScreen from '../containers/RegistrationScreen';
 import UserTabContainer from './UserTabContainer';
+import SessionScreen from '../containers/SessionScreen';
 
 export type RootStackParamList = {
   WelcomeScreen: undefined;
   LoginScreen: undefined;
   RegistrationScreen: undefined;
   UserTabContainer: undefined;
+  SessionScreen: {meditation: MeditationSession};
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -58,6 +62,7 @@ const MainStackNavigator = () => {
               name="UserTabContainer"
               component={UserTabContainer}
             />
+            <Stack.Screen name="SessionScreen" component={SessionScreen} />
           </>
         )}
       </Stack.Navigator>
