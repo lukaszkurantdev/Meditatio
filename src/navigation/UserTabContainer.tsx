@@ -26,7 +26,7 @@ const UserTabContainer = () => {
       <Tab.Navigator
         lazy
         screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color}) => {
+          tabBarIcon: ({color}) => {
             let iconName: string = '';
 
             if (route.name === 'MeditationScreen') {
@@ -41,8 +41,8 @@ const UserTabContainer = () => {
           },
         })}
         tabBarOptions={{
-          activeTintColor: Colors.PRIMARY,
-          inactiveTintColor: Colors.WHITE,
+          activeTintColor: Colors.WHITE,
+          inactiveTintColor: 'rgba(255,255,255,0.2)',
           keyboardHidesTabBar: true,
           showLabel: false,
 
@@ -55,7 +55,7 @@ const UserTabContainer = () => {
             elevation: 0,
             height: 60,
             position: 'absolute',
-            backgroundColor: 'rgba(255,255,255,0.1)',
+            backgroundColor: 'transparent',
             borderWidth: 0,
             borderTopColor: 'rgba(255,255,255,0.1)',
           },

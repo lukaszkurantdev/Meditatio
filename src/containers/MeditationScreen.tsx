@@ -111,7 +111,7 @@ const MeditationScreen: React.FC<IProps> = ({navigation}) => {
         ref={swiper}
         speed={0.7}
         animatedValue={scrollAnimatedValue}
-        dividerWidth={1}
+        dividerWidth={10}
         dividerColor="black"
         backgroundColor="black">
         {Meditations.map((value, index) => (
