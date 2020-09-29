@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {View, ImageBackground, StyleSheet, Text, StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -39,8 +33,11 @@ const SessionScreen: React.FC<IProps> = ({route, navigation}) => {
       sessionInterval = setInterval(() => {
         setProgress((prev) => prev + 1);
       }, percent);
+
+      StatusBar.setHidden(true, 'fade');
     } else {
       clearInterval(sessionInterval);
+      StatusBar.setHidden(false, 'fade');
     }
 
     setStarted((prev) => !prev);
@@ -68,16 +65,27 @@ const SessionScreen: React.FC<IProps> = ({route, navigation}) => {
             width={1}
             fill={progress}
             rotation={0}
-            tintColor={Colors.PRIMARY}
-            backgroundColor={'rgba(255,255,255,0.2)'}>
+            tintColor={Colors.WHITE}
+            backgroundColor={'rgba(255,255,255,0.1)'}
+            lineCap={'round'}>
             {(fill) => (
-              <Text style={GlobalStyles.hugeText}>{Math.round(fill)}</Text>
+              <View
+                style={{
+                  height: 200,
+                  width: 200,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  borderRadius: 200,
+                }}>
+                <FunctionalIconButton
+                  iconName={'pause'}
+                  onPress={pressMainButton}
+                />
+              </View>
             )}
           </AnimatedCircularProgress>
-          <FunctionalIconButton
-            iconName={started ? 'pause' : 'play'}
-            onPress={pressMainButton}
-          />
+          <Text style={[GlobalStyles.hugeText, styles.timeText]}>II:II</Text>
         </View>
       ) : (
         <View style={styles.insideContainer}>
@@ -114,5 +122,8 @@ const styles = StyleSheet.create({
   },
   statContainer: {
     marginVertical: 30,
+  },
+  timeText: {
+    marginTop: 40,
   },
 });
